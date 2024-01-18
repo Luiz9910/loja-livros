@@ -1,8 +1,6 @@
 package com.lojabiblioteca.model.User;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,7 @@ public class User {
     @Column(length = 100)
     private String name;
 
+    @Column(unique = true)
     private String email;
 
     @Column(length = 60)
@@ -27,5 +26,5 @@ public class User {
 
     private UserRole role;
 
-    private boolean IsEnabled;
+    private boolean isEnabled;
 }
