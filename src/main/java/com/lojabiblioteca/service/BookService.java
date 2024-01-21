@@ -49,4 +49,11 @@ public class BookService {
         Book bookToMapper = bookRepository.save(bookResponse);
         return mapper.map(bookToMapper, BookResponseDTO.class);
     }
+
+    public void delete(Long id) {
+        bookRepository.findById(id)
+                .orElseThrow(() ->  new NotFoundException("Book não encotrado para deletar"));
+
+        bookRepository.deleteById(id);
+    }
 }

@@ -25,4 +25,10 @@ public class BookController {
     public BookResponseDTO update(@PathVariable Long id, @Valid @RequestBody BookUpdateDTO book) {
         return this.bookService.update(id, book);
     }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        this.bookService.delete(id);
+    }
 }
