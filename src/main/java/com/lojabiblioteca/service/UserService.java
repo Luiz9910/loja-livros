@@ -21,17 +21,17 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encotrado"));
         User newUser = mapper.map(user, User.class);
 
-        return new UserResponseDTO(newUser.getName(), newUser.getEmail(), newUser.getRole(), newUser.isEnabled());
+        return new UserResponseDTO(newUser.getId(), newUser.getName(), newUser.getEmail(), newUser.getRole(), newUser.isEnabled());
     }
 
-    public UserDTO create(UserDTO user) {
+    public UserResponseDTO create(UserDTO user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new ConflitException("Usuário já cadastrado no sistema");
         }
 
         User newUser = mapper.map(user, User.class);
         userRepository.save(newUser);
-        return user;
+        return new UserResponseDTO(newUser.getId(), newUser.getName(), newUser.getEmail(), newUser.getRole(), newUser.isEnabled());
     }
 
     public UserResponseDTO update(Long id, UserUpdateDTO user) {
@@ -43,7 +43,7 @@ public class UserService {
         existingUser.setEnabled(user.isIsEnabled());
         userRepository.save(existingUser);
 
-        return new UserResponseDTO(user.getName(), existingUser.getEmail(), user.getRole(), user.isIsEnabled());
+        return new UserResponseDTO(existingUser.getId(), user.getName(), existingUser.getEmail(), user.getRole(), user.isIsEnabled());
     }
 
     public void delete(Long id) {

@@ -1,5 +1,6 @@
 package com.lojabiblioteca.model;
 
+import com.lojabiblioteca.model.User.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -7,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,15 +30,14 @@ public class Book {
     private String language;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo ano é obrigatório")
-    private String year;
-
-    @Column(nullable = false)
-    @NotBlank(message = "Campo publicado é obrigatório")
-    private String publisher;
+    @NotNull(message = "Campo publicado é obrigatório")
+    private LocalDate publisher;
 
     @Column(nullable = false)
     @Min(1)
-    @NotNull(message = "Campo páginas é obrigatório")
     private int pages;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

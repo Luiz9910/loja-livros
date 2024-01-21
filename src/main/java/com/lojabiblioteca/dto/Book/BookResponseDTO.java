@@ -12,7 +12,6 @@ public class BookResponseDTO {
     private String id;
     private String name;
     private String language;
-    private String year;
     private String publisher;
     private int pages;
 }

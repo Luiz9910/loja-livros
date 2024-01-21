@@ -17,13 +17,10 @@ public class BookDTO {
     @NotBlank(message = "Campo linguagem é obrigatório")
     private String language;
 
-    @NotBlank(message = "Campo ano é obrigatório")
-    private String year;
-
-    @NotBlank(message = "Campo publicado é obrigatório")
-    private String publisher;
-
     @NotNull(message = "Campo páginas é obrigatório")
     @Min(1)
     private Integer pages;
+
+    @NotNull(message = "Campo id_user obrigatório")
+    private long user_id;
 }
