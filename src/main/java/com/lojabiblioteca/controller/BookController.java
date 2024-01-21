@@ -2,6 +2,7 @@ package com.lojabiblioteca.controller;
 
 import com.lojabiblioteca.dto.Book.BookDTO;
 import com.lojabiblioteca.dto.Book.BookResponseDTO;
+import com.lojabiblioteca.dto.Book.BookUpdateDTO;
 import com.lojabiblioteca.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class BookController {
     }
 
     @PutMapping("{id}")
-    public BookResponseDTO update(@PathVariable Long id, @Valid @RequestBody BookDTO book) {
+    public BookResponseDTO update(@PathVariable Long id, @Valid @RequestBody BookUpdateDTO book) {
         return this.bookService.update(id, book);
     }
 }

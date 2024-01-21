@@ -2,6 +2,7 @@ package com.lojabiblioteca.service;
 
 import com.lojabiblioteca.dto.Book.BookDTO;
 import com.lojabiblioteca.dto.Book.BookResponseDTO;
+import com.lojabiblioteca.dto.Book.BookUpdateDTO;
 import com.lojabiblioteca.dto.User.UserResponseDTO;
 import com.lojabiblioteca.exception.NotFoundException;
 import com.lojabiblioteca.model.Book;
@@ -26,7 +27,7 @@ public class BookService {
 
     public BookResponseDTO create(BookDTO book) {
         User user = userRepository.findById(book.getUser_id())
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado para publicar"));
 
         Book newBook = mapper.map(book, Book.class);
         newBook.setPublisher(LocalDate.now());
@@ -36,12 +37,13 @@ public class BookService {
         return mapper.map(bookResponse, BookResponseDTO.class);
     }
 
-    public BookResponseDTO update(Long id, BookDTO book) {
+    public BookResponseDTO update(Long id, BookUpdateDTO book) {
         Book bookResponse = bookRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Book não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Book não encontrado para atualizar"));
 
         bookResponse.setName(book.getName());
         bookResponse.setLanguage(book.getLanguage());
+        bookResponse.setPages(book.getPages());
         bookResponse.setPublisher(LocalDate.now());
 
         Book bookToMapper = bookRepository.save(bookResponse);
