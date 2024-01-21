@@ -33,7 +33,18 @@ public class BookService {
         newBook.setUser(user);
 
         Book bookResponse = bookRepository.save(newBook);
-        BookResponseDTO bookResponseDTO = mapper.map(bookResponse, BookResponseDTO.class);
-        return bookResponseDTO;
+        return mapper.map(bookResponse, BookResponseDTO.class);
+    }
+
+    public BookResponseDTO update(Long id, BookDTO book) {
+        Book bookResponse = bookRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Book não encontrado"));
+
+        bookResponse.setName(book.getName());
+        bookResponse.setLanguage(book.getLanguage());
+        bookResponse.setPublisher(LocalDate.now());
+
+        Book bookToMapper = bookRepository.save(bookResponse);
+        return mapper.map(bookToMapper, BookResponseDTO.class);
     }
 }
