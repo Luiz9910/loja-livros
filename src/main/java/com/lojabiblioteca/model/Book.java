@@ -26,9 +26,13 @@ public class Book {
     @NotBlank(message = "Campo nome é obrigatório")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Author author;
+    @ManyToMany
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private List<Author> authors;
 
     @Column(nullable = false)
     @NotBlank(message = "Campo língua é obrigatório")

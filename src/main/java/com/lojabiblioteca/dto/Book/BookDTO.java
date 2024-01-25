@@ -3,7 +3,6 @@ package com.lojabiblioteca.dto.Book;
 import com.lojabiblioteca.model.Author;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class BookDTO {
     private String name;
 
     @NotNull(message = "Campo author é obrigatório")
-    private Author author;
+    private List<AuthDTO> authors; // Alteração feita aqui
 
     @NotBlank(message = "Campo linguagem é obrigatório")
     private String language;

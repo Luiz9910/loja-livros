@@ -38,21 +38,28 @@ public class BookService {
         r
     }*/
 
+
     @Transactional
     public BookResponseDTO create(BookDTO book) {
         User user = userRepository.findById(book.getUser_id())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado para publicar"));
 
+        List<Author> authors = book.getAuthors().stream()
+                .map(authorDto -> {
+                    Author author = mapper.map(authorDto, Author.class);
+                    return authorRepository.save(author);
+                })
+                .collect(Collectors.toList());
+
         Book newBook = mapper.map(book, Book.class);
         newBook.setPublisher(LocalDate.now());
         newBook.setUser(user);
-
-        Author author = authorRepository.save(newBook.getAuthor());
-        newBook.setAuthor(author);
+        newBook.setAuthors(authors);
 
         Book bookResponse = bookRepository.save(newBook);
         return mapper.map(bookResponse, BookResponseDTO.class);
     }
+
 
     public BookResponseDTO update(Long id, BookUpdateDTO book) {
         Book bookResponse = bookRepository.findById(id)

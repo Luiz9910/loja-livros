@@ -1,10 +1,11 @@
 package com.lojabiblioteca.dto.Book;
 
 import com.lojabiblioteca.model.Author;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class BookResponseDTO {
     private String id;
     private String name;
-    private Author author;
+    private List<Author> authors;
     private String language;
     private String publisher;
     private int pages;
