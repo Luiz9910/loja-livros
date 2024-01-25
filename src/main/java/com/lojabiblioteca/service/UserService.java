@@ -29,6 +29,7 @@ public class UserService {
             throw new ConflitException("Usuário já cadastrado no sistema");
         }
 
+        user.setIsEnabled(true);
         User newUser = mapper.map(user, User.class);
         userRepository.save(newUser);
         return new UserResponseDTO(newUser.getId(), newUser.getName(), newUser.getEmail(), newUser.getRole(), newUser.isEnabled());

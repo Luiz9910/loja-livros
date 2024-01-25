@@ -15,6 +15,12 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    /*
+    @GetMapping("{id}")
+    public BookResponseDTO getBookByName(@PathVariable String name) {
+        return this.bookService.getBookByName(name);
+    }*/
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public BookResponseDTO create(@Valid @RequestBody BookDTO book) {

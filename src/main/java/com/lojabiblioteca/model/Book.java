@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,8 +26,11 @@ public class Book {
     @NotBlank(message = "Campo nome é obrigatório")
     private String name;
 
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    private List<Author> authors;
+
     @Column(nullable = false)
-    @NotBlank(message = "Campo lingua é obrigatório")
+    @NotBlank(message = "Campo língua é obrigatório")
     private String language;
 
     @Column(nullable = false)
