@@ -18,8 +18,8 @@ public class BookDTO {
     @NotBlank(message = "Campo nome é obrigatório")
     private String name;
 
-    @NotEmpty(message = "Campo author é obrigatório")
-    private List<Author> authors;
+    @NotNull(message = "Campo author é obrigatório")
+    private Author author;
 
     @NotBlank(message = "Campo linguagem é obrigatório")
     private String language;

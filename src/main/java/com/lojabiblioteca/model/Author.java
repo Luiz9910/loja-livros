@@ -24,9 +24,4 @@ public class Author {
     @Column(nullable = false)
     @NotBlank(message = "Campo nome é obrigatório")
     private String surname;
-
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;
-
 }

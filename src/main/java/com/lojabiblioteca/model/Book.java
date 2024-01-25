@@ -26,8 +26,9 @@ public class Book {
     @NotBlank(message = "Campo nome é obrigatório")
     private String name;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-    private List<Author> authors;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
     @Column(nullable = false)
     @NotBlank(message = "Campo língua é obrigatório")
