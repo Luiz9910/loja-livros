@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,11 +34,20 @@ public class BookService {
 
     private ModelMapper mapper = new ModelMapper();
 
-    /*
-    public BookResponseDTO getBookByName(String name) {
-        r
-    }*/
 
+    public List<BookResponseDTO> getBooksByName(String name) {
+        List<Book> books = bookRepository.findByPartialName(name);
+        if (books.isEmpty()) {
+            throw new NotFoundException("Livros com esse nome não encontrado");
+        }
+
+        List<BookResponseDTO> booksResponse = books.stream().map(book -> {
+            BookResponseDTO bookResponseDTO = mapper.map(book, BookResponseDTO.class);
+            return bookResponseDTO;
+        }).collect(Collectors.toList());
+
+        return booksResponse;
+    }
 
     @Transactional
     public BookResponseDTO create(BookDTO book) {

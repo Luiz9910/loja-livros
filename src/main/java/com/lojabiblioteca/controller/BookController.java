@@ -9,17 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("book")
 public class BookController {
     @Autowired
     private BookService bookService;
 
-    /*
-    @GetMapping("{id}")
-    public BookResponseDTO getBookByName(@PathVariable String name) {
-        return this.bookService.getBookByName(name);
-    }*/
+    @GetMapping("{name}")
+    public List<BookResponseDTO> getBooksByName(@PathVariable String name) {
+        return this.bookService.getBooksByName(name);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
