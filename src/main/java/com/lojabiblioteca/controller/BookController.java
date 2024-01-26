@@ -17,8 +17,13 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("{name}")
-    public List<BookResponseDTO> getBooksByName(@PathVariable String name) {
+    @GetMapping("{id}")
+    public BookResponseDTO getBookById(@PathVariable Long id) {
+        return this.bookService.getBookById(id);
+    }
+
+    @GetMapping
+    public List<BookResponseDTO> getBooksByName(@RequestParam String name) {
         return this.bookService.getBooksByName(name);
     }
 

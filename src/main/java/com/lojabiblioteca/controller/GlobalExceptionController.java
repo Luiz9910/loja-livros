@@ -1,5 +1,6 @@
 package com.lojabiblioteca.controller;
 
+import com.lojabiblioteca.exception.BadRequestException;
 import com.lojabiblioteca.exception.ConflitException;
 import com.lojabiblioteca.exception.NotFoundException;
 import com.lojabiblioteca.dto.ResponseDTO;
@@ -24,6 +25,13 @@ public class GlobalExceptionController {
     @ExceptionHandler(ConflitException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseDTO handleConflitException(ConflitException ex) {
+        String messageError = ex.getMessage();
+        return new ResponseDTO(messageError);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseDTO handleBadRequestException(BadRequestException ex) {
         String messageError = ex.getMessage();
         return new ResponseDTO(messageError);
     }

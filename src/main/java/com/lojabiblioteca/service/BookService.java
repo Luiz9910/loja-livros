@@ -3,7 +3,7 @@ package com.lojabiblioteca.service;
 import com.lojabiblioteca.dto.Book.BookDTO;
 import com.lojabiblioteca.dto.Book.BookResponseDTO;
 import com.lojabiblioteca.dto.Book.BookUpdateDTO;
-import com.lojabiblioteca.dto.User.UserResponseDTO;
+import com.lojabiblioteca.exception.BadRequestException;
 import com.lojabiblioteca.exception.NotFoundException;
 import com.lojabiblioteca.model.Author;
 import com.lojabiblioteca.model.Book;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +33,18 @@ public class BookService {
 
     private ModelMapper mapper = new ModelMapper();
 
+    public BookResponseDTO getBookById(Long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Livro não encontrado"));
+
+        return mapper.map(book, BookResponseDTO.class);
+    }
 
     public List<BookResponseDTO> getBooksByName(String name) {
+        if (name.isEmpty()) {
+            throw new BadRequestException("Nome do livro inválido");
+        }
+
         List<Book> books = bookRepository.findByPartialName(name);
         if (books.isEmpty()) {
             throw new NotFoundException("Livros com esse nome não encontrado");
