@@ -33,6 +33,13 @@ public class BookService {
 
     private ModelMapper mapper = new ModelMapper();
 
+    public List<BookResponseDTO> getBooks() {
+        return bookRepository.findAll().stream().map(book -> {
+            BookResponseDTO booksResponseDTO = mapper.map(book, BookResponseDTO.class);
+            return booksResponseDTO;
+        }).toList();
+    }
+
     public BookResponseDTO getBookById(Long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Livro não encontrado"));
@@ -53,7 +60,7 @@ public class BookService {
         List<BookResponseDTO> booksResponse = books.stream().map(book -> {
             BookResponseDTO bookResponseDTO = mapper.map(book, BookResponseDTO.class);
             return bookResponseDTO;
-        }).collect(Collectors.toList());
+        }).toList();
 
         return booksResponse;
     }
