@@ -16,5 +16,6 @@ public class BookResponseDTO {
     private List<Author> authors;
     private String language;
     private String publisher;
+    private int quantity;
     private int pages;
 }

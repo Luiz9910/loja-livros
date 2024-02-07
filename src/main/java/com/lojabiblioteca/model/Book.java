@@ -46,6 +46,9 @@ public class Book {
     @Min(1)
     private int pages;
 
+    @Column(nullable = false)
+    private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -1,26 +1,28 @@
 package com.lojabiblioteca.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "author")
-public class Author {
+@Table(name = "item_sale")
+public class ItemSale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @NotBlank(message = "Campo nome é obrigatório")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "sale_id", nullable = false)
+    private Sale sale;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo nome é obrigatório")
-    private String surname;
+    private long quantity;
 }

@@ -27,6 +27,9 @@ public class BookDTO {
     @Min(1)
     private Integer pages;
 
+    @NotNull(message = "Define a quantidade de livros para a venda")
+    private int quantity;
+
     @NotNull(message = "Campo id_user obrigatório")
     private long user_id;
 }

@@ -17,6 +17,8 @@ public class BookUpdateDTO {
     @NotBlank(message = "Campo linguagem é obrigatório")
     private String language;
 
+    private int quantity;
+
     @NotNull(message = "Campo páginas é obrigatório")
     @Min(1)
     private Integer pages;
