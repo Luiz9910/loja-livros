@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BookSaleDTO {
     @NotBlank(message = "O item da venda obrigatório")
-    private long productid;
+    private long bookById;
 
     @NotBlank(message = "Campo quantidade é obrigatório")
     private int quantity;

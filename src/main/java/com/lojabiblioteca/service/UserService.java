@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    private ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
 
     public UserResponseDTO getOne(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encotrado"));
