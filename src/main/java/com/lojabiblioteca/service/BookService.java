@@ -95,6 +95,7 @@ public class BookService {
         bookResponse.setLanguage(book.getLanguage());
         bookResponse.setPages(book.getPages());
         bookResponse.setPublisher(LocalDate.now());
+        bookResponse.setPrice(book.getPrice());
         bookResponse.setQuantity(book.getQuantity());
 
         Book bookToMapper = bookRepository.save(bookResponse);

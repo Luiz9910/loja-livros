@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,6 +30,9 @@ public class BookDTO {
 
     @NotNull(message = "Define a quantidade de livros para a venda")
     private int quantity;
+
+    @NotNull(message = "Define o preço do livro")
+    private BigDecimal price;
 
     @NotNull(message = "Campo id_user obrigatório")
     private long user_id;
