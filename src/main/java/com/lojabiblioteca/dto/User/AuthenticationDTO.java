@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class AuthenticationDTO {
 
-    @NotBlank(message = "Campo username é obrigatório")
+    @NotBlank(message = "Campo email é obrigatório")
     private String email;
 
     @NotBlank(message = "Campo password é obrigatório")

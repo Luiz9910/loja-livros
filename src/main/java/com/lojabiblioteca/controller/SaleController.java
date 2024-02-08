@@ -3,6 +3,7 @@ package com.lojabiblioteca.controller;
 import com.lojabiblioteca.dto.Sale.SaleDTO;
 import com.lojabiblioteca.dto.Sale.SaleInfoDTO;
 import com.lojabiblioteca.service.SaleService;
+import jakarta.validation.Valid;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class SaleController {
     @SneakyThrows
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody SaleDTO saleDTO) {
+    public Long create(@Valid @RequestBody SaleDTO saleDTO) {
         return saleService.save(saleDTO);
     }
 }

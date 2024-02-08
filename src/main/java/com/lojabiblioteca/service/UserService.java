@@ -9,6 +9,7 @@ import com.lojabiblioteca.model.User.User;
 import com.lojabiblioteca.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,11 +26,16 @@ public class UserService {
     }
 
     public UserResponseDTO create(UserDTO user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        User existingUser = userRepository.findByEmail(user.getEmail());
+
+        if (existingUser != null && existingUser.isEnabled()) {
             throw new ConflitException("Usuário já cadastrado no sistema");
         }
 
         user.setIsEnabled(true);
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(encryptedPassword);
         User newUser = mapper.map(user, User.class);
         userRepository.save(newUser);
         return new UserResponseDTO(newUser.getId(), newUser.getName(), newUser.getEmail(), newUser.getRole(), newUser.isEnabled());

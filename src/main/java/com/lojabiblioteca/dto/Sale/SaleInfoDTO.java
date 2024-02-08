@@ -1,6 +1,5 @@
 package com.lojabiblioteca.dto.Sale;
 
-import com.lojabiblioteca.dto.Book.BookDTO;
 import com.lojabiblioteca.dto.Book.BookInfoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
